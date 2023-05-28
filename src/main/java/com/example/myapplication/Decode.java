@@ -1,14 +1,19 @@
 package com.example.myapplication;
 
-import java.awt.image.BufferedImage;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+
 import java.io.ByteArrayInputStream;
-import java.util.Base64;
-import javax.imageio.ImageIO;
+import java.io.IOException;
 
 
 public class Decode {
-    public static void decodeImage(String base64EncodedImage){
-        byte[] imageData = Base64.getDecoder().decode(base64EncodedImage.split(",", 2)[1]);
-        return ImageIO.read(new ByteArrayInputStream(imageData));
+    public static Bitmap decodeImage(String base64EncodedImage){
+
+        byte[] imageData = Base64.decode(base64EncodedImage.split(",", 2)[1],
+                    Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
     }
 }
